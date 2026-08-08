@@ -52,7 +52,16 @@ export interface CityStats {
   avgTempSummer: number
   avgTempWinter: number
   rainfallMm: number
+  /** Numbeo Safety Index (higher = safer) */
   safetyIndex: number
+  /** Numbeo Crime Index (higher = more crime perceived) */
+  crimeIndex: number
+  /** Official conventional crimes / 1000 inhab. (MIR 2024) */
+  crimeRatePer1000: number
+  /** Official thefts (hurtos) / 1000 inhab. (MIR 2024) */
+  theftRatePer1000: number
+  /** Official violent robberies / 1000 inhab. (MIR 2024) */
+  violentRobberyPer1000: number
   healthcareIndex: number
   airQuality: number
   englishFriendly: number
@@ -87,6 +96,10 @@ export type MetricKey = keyof Pick<
   | 'rentBurden'
   | 'costOfLivingIndex'
   | 'safetyIndex'
+  | 'crimeIndex'
+  | 'crimeRatePer1000'
+  | 'theftRatePer1000'
+  | 'violentRobberyPer1000'
   | 'healthcareIndex'
   | 'sunnyDays'
   | 'jobMarket'
@@ -114,4 +127,5 @@ export type CategoryId =
   | 'finance'
   | 'work'
   | 'climate'
+  | 'safety'
   | 'lifestyle'

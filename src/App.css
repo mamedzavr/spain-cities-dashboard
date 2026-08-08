@@ -94,6 +94,79 @@
   letter-spacing: -0.02em;
 }
 
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.panel-head h2 {
+  margin: 0;
+}
+
+.hint-inline,
+.cat-hint {
+  margin: 0.75rem 0 0;
+  color: rgba(11, 31, 42, 0.6);
+  font-size: 0.85rem;
+}
+
+.hint-inline {
+  margin: 0;
+}
+
+.scope-banner {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: rgba(42, 157, 143, 0.1);
+  border: 1px solid rgba(42, 157, 143, 0.22);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  animation: rise 0.55s ease both;
+}
+
+.city-toggle-wrap {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 0.3rem;
+}
+
+.solo-btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.solo-btn:hover,
+.solo-btn.solid {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.card-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.city-card.featured {
+  grid-column: 1 / -1;
+  max-width: 720px;
+}
+
 .city-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -227,21 +300,51 @@
 
 .rank-row {
   display: grid;
-  grid-template-columns: 28px 1fr auto;
-  gap: 0.65rem;
+  grid-template-columns: 1fr auto;
+  gap: 0.45rem;
   align-items: center;
-  padding: 0.55rem 0.65rem;
+  padding: 0.35rem 0.45rem 0.35rem 0.55rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid transparent;
-  cursor: pointer;
   transition: 0.2s ease;
 }
 
 .rank-row:hover,
-.rank-row.active {
+.rank-row.active,
+.rank-row.selected {
   border-color: rgba(42, 157, 143, 0.35);
   background: #fff;
+}
+
+.rank-main {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.2rem 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  width: 100%;
+}
+
+.rank-body {
+  min-width: 0;
+}
+
+.rank-meta {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.72rem;
+  color: rgba(11, 31, 42, 0.55);
+}
+
+.rank-score {
+  font-size: 0.95rem;
 }
 
 .rank-row .pos {

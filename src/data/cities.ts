@@ -8,6 +8,8 @@ import type { CityStats, MetricDef } from '../types'
  * - Idealista rental €/m² & affordability (2025)
  * - INE / InfoJobs–Fotocasa salary & rent-effort context (2024–2025)
  * - AEMET climate normals; Eurostat / regional unemployment (approx.)
+* - Numbeo Crime/Safety Index (Aug 2026)
+* - Ministerio del Interior — Balance de Criminalidad 2024 (municipal)
  *
  * Non-Numbeo cities use Idealista housing anchors + calibrated estimates
  * for restaurants/utilities relative to peer cities. Lifestyle scores (0–100)
@@ -19,6 +21,8 @@ export const SOURCES = [
   { name: 'Idealista', url: 'https://www.idealista.com/news/' },
   { name: 'INE', url: 'https://www.ine.es/' },
   { name: 'AEMET', url: 'https://www.aemet.es/' },
+  { name: 'Numbeo Crime', url: 'https://www.numbeo.com/crime/country_result.jsp?country=Spain' },
+  { name: 'Ministerio del Interior (Balance 2024)', url: 'https://www.interior.gob.es/' },
 ]
 
 export const cities: CityStats[] = [
@@ -54,7 +58,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 31,
     avgTempWinter: 6,
     rainfallMm: 420,
-    safetyIndex: 72,
+    safetyIndex: 71,
+    crimeIndex: 29.0,
+    crimeRatePer1000: 60.2,
+    theftRatePer1000: 23.9,
+    violentRobberyPer1000: 2.5,
     healthcareIndex: 78,
     airQuality: 62,
     englishFriendly: 58,
@@ -113,7 +121,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 28,
     avgTempWinter: 9,
     rainfallMm: 640,
-    safetyIndex: 52,
+    safetyIndex: 48,
+    crimeIndex: 52.2,
+    crimeRatePer1000: 93.3,
+    theftRatePer1000: 47.3,
+    violentRobberyPer1000: 7.4,
     healthcareIndex: 76,
     airQuality: 58,
     englishFriendly: 72,
@@ -172,7 +184,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 30,
     avgTempWinter: 10,
     rainfallMm: 475,
-    safetyIndex: 70,
+    safetyIndex: 62,
+    crimeIndex: 37.9,
+    crimeRatePer1000: 66.9,
+    theftRatePer1000: 29.4,
+    violentRobberyPer1000: 2.7,
     healthcareIndex: 77,
     airQuality: 68,
     englishFriendly: 62,
@@ -231,7 +247,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 36,
     avgTempWinter: 10,
     rainfallMm: 540,
-    safetyIndex: 68,
+    safetyIndex: 63,
+    crimeIndex: 37.0,
+    crimeRatePer1000: 61.0,
+    theftRatePer1000: 23.1,
+    violentRobberyPer1000: 2.8,
     healthcareIndex: 74,
     airQuality: 65,
     englishFriendly: 48,
@@ -290,7 +310,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 24,
     avgTempWinter: 8,
     rainfallMm: 1170,
-    safetyIndex: 78,
+    safetyIndex: 51,
+    crimeIndex: 48.7,
+    crimeRatePer1000: 55.9,
+    theftRatePer1000: 32.8,
+    violentRobberyPer1000: 2.4,
     healthcareIndex: 82,
     airQuality: 72,
     englishFriendly: 55,
@@ -349,7 +373,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 30,
     avgTempWinter: 12,
     rainfallMm: 520,
-    safetyIndex: 66,
+    safetyIndex: 68,
+    crimeIndex: 32.1,
+    crimeRatePer1000: 52.1,
+    theftRatePer1000: 22.2,
+    violentRobberyPer1000: 1.4,
     healthcareIndex: 74,
     airQuality: 70,
     englishFriendly: 68,
@@ -408,7 +436,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 33,
     avgTempWinter: 5,
     rainfallMm: 320,
-    safetyIndex: 76,
+    safetyIndex: 74,
+    crimeIndex: 26.2,
+    crimeRatePer1000: 33.4,
+    theftRatePer1000: 12.1,
+    violentRobberyPer1000: 1.7,
     healthcareIndex: 75,
     airQuality: 70,
     englishFriendly: 42,
@@ -467,7 +499,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 34,
     avgTempWinter: 6,
     rainfallMm: 360,
-    safetyIndex: 72,
+    safetyIndex: 66,
+    crimeIndex: 34.0,
+    crimeRatePer1000: 46.0,
+    theftRatePer1000: 16.1,
+    violentRobberyPer1000: 1.6,
     healthcareIndex: 73,
     airQuality: 78,
     englishFriendly: 50,
@@ -526,7 +562,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 31,
     avgTempWinter: 12,
     rainfallMm: 310,
-    safetyIndex: 68,
+    safetyIndex: 63,
+    crimeIndex: 36.8,
+    crimeRatePer1000: 57.5,
+    theftRatePer1000: 20.2,
+    violentRobberyPer1000: 2.3,
     healthcareIndex: 74,
     airQuality: 72,
     englishFriendly: 70,
@@ -585,7 +625,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 22,
     avgTempWinter: 9,
     rainfallMm: 1000,
-    safetyIndex: 80,
+    safetyIndex: 72,
+    crimeIndex: 28.0,
+    crimeRatePer1000: 41.6,
+    theftRatePer1000: 16.8,
+    violentRobberyPer1000: 1.1,
     healthcareIndex: 78,
     airQuality: 82,
     englishFriendly: 45,
@@ -644,7 +688,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 30,
     avgTempWinter: 11,
     rainfallMm: 450,
-    safetyIndex: 70,
+    safetyIndex: 64,
+    crimeIndex: 36.4,
+    crimeRatePer1000: 71.2,
+    theftRatePer1000: 32.7,
+    violentRobberyPer1000: 1.9,
     healthcareIndex: 75,
     airQuality: 76,
     englishFriendly: 75,
@@ -703,7 +751,11 @@ export const cities: CityStats[] = [
     avgTempSummer: 27,
     avgTempWinter: 18,
     rainfallMm: 150,
-    safetyIndex: 64,
+    safetyIndex: 65,
+    crimeIndex: 35.0,
+    crimeRatePer1000: 41.8,
+    theftRatePer1000: 12.9,
+    violentRobberyPer1000: 1.2,
     healthcareIndex: 72,
     airQuality: 80,
     englishFriendly: 72,
@@ -736,7 +788,7 @@ export const metrics: MetricDef[] = [
   { key: 'costOfLivingIndex', label: 'Индекс стоимости жизни', unit: '', category: 'overview', format: 'index' },
   { key: 'rentBurden', label: 'Доля зарплаты на аренду', unit: '%', category: 'overview', lowerIsBetter: true, format: 'percent' },
   { key: 'salaryNet', label: 'Средняя чистая зарплата', unit: '€', category: 'overview', format: 'euro' },
-  { key: 'singleMonthlyExRent', label: 'Бюджет одного (без аренды)', unit: '€', category: 'overview', lowerIsBetter: true, format: 'euro' },
+  { key: 'crimeIndex', label: 'Индекс преступности', unit: '', category: 'overview', lowerIsBetter: true, format: 'index' },
   { key: 'rent1brCenter', label: '1BR центр', unit: '€/мес', category: 'housing', lowerIsBetter: true, format: 'euro' },
   { key: 'rent1brOutside', label: '1BR вне центра', unit: '€/мес', category: 'housing', lowerIsBetter: true, format: 'euro' },
   { key: 'rentPerSqm', label: 'Аренда €/м²', unit: '€', category: 'housing', lowerIsBetter: true, format: 'euro' },
@@ -750,7 +802,11 @@ export const metrics: MetricDef[] = [
   { key: 'jobMarket', label: 'Рынок труда', unit: '/100', category: 'work', format: 'index' },
   { key: 'techScene', label: 'Tech-сцена', unit: '/100', category: 'work', format: 'index' },
   { key: 'sunnyDays', label: 'Солнечных дней', unit: '', category: 'climate', format: 'number' },
-  { key: 'safetyIndex', label: 'Безопасность', unit: '/100', category: 'lifestyle', format: 'index' },
+  { key: 'crimeIndex', label: 'Индекс преступности (Numbeo)', unit: '', category: 'safety', lowerIsBetter: true, format: 'index' },
+  { key: 'safetyIndex', label: 'Индекс безопасности', unit: '/100', category: 'safety', format: 'index' },
+  { key: 'crimeRatePer1000', label: 'Преступления / 1000 жит.', unit: '', category: 'safety', lowerIsBetter: true, format: 'number' },
+  { key: 'theftRatePer1000', label: 'Кражи / 1000 жит.', unit: '', category: 'safety', lowerIsBetter: true, format: 'number' },
+  { key: 'violentRobberyPer1000', label: 'Грабежи / 1000 жит.', unit: '', category: 'safety', lowerIsBetter: true, format: 'number' },
   { key: 'healthcareIndex', label: 'Здравоохранение', unit: '/100', category: 'lifestyle', format: 'index' },
   { key: 'beachAccess', label: 'Доступ к пляжу', unit: '/100', category: 'lifestyle', format: 'index' },
   { key: 'walkability', label: 'Пешеходность', unit: '/100', category: 'lifestyle', format: 'index' },
@@ -763,7 +819,8 @@ export const categories = [
   { id: 'finance' as const, label: 'Финансы', hint: 'Коммуналка, транспорт, бюджет месяца' },
   { id: 'work' as const, label: 'Работа', hint: 'Зарплаты, безработица, карьера' },
   { id: 'climate' as const, label: 'Климат', hint: 'Солнце, температура, осадки' },
-  { id: 'lifestyle' as const, label: 'Образ жизни', hint: 'Безопасность, море, walkability' },
+  { id: 'safety' as const, label: 'Безопасность', hint: 'Преступность: Numbeo + официальная статистика MIR 2024' },
+  { id: 'lifestyle' as const, label: 'Образ жизни', hint: 'Здоровье, море, walkability' },
 ]
 
 export function formatMetric(value: number, format?: MetricDef['format']): string {
@@ -794,15 +851,22 @@ export function affordabilityScore(city: CityStats): number {
 export function overallScore(city: CityStats): number {
   const afford = affordabilityScore(city)
   return Math.round(
-    afford * 0.22 +
-      city.salaryNet / 25 * 0.12 +
-      city.jobMarket * 0.12 +
-      city.safetyIndex * 0.1 +
-      city.healthcareIndex * 0.08 +
-      city.sunnyDays / 3.2 * 0.1 +
-      city.walkability * 0.08 +
-      city.culture * 0.08 +
+    afford * 0.2 +
+      city.salaryNet / 25 * 0.11 +
+      city.jobMarket * 0.11 +
+      city.safetyIndex * 0.12 +
+      (100 - city.crimeIndex) * 0.06 +
+      city.healthcareIndex * 0.07 +
+      city.sunnyDays / 3.2 * 0.09 +
+      city.walkability * 0.07 +
+      city.culture * 0.07 +
       city.beachAccess * 0.05 +
       (100 - city.unemployment * 3) * 0.05,
   )
+}
+
+export function cityListLabel(cities: CityStats[], max = 4): string {
+  const names = cities.map((c) => c.nameEs)
+  if (names.length <= max) return names.join(', ')
+  return `${names.slice(0, max).join(', ')} +${names.length - max}`
 }
