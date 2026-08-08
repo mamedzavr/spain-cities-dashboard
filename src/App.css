@@ -71,9 +71,144 @@
 
 .toolbar {
   display: grid;
+  grid-template-columns: 1.35fr 1fr;
   gap: 1rem;
   margin: 1.5rem 0 1rem;
   animation: rise 0.7s ease 0.08s both;
+}
+
+.toolbar-side {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.aspect-panel {
+  margin-bottom: 1rem;
+  animation: rise 0.7s ease 0.1s both;
+}
+
+.aspect-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.metric-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: rgba(11, 31, 42, 0.65);
+}
+
+.metric-inline select {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+}
+
+.metric-static {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.quality-badge {
+  display: inline-flex;
+  margin-top: 0.35rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.quality-badge.q-official {
+  background: rgba(42, 157, 143, 0.14);
+  color: var(--sea-deep);
+}
+
+.quality-badge.q-mixed {
+  background: rgba(232, 168, 56, 0.18);
+  color: #8a5a12;
+}
+
+.quality-badge.q-estimated {
+  background: rgba(11, 31, 42, 0.08);
+  color: rgba(11, 31, 42, 0.62);
+}
+
+.spain-map {
+  width: 100%;
+}
+
+.spain-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(232, 168, 56, 0.12), transparent 45%),
+    linear-gradient(180deg, #eef7f4, #e7f0ec);
+  border: 1px solid var(--line);
+}
+
+.spain-map .land {
+  stroke: rgba(27, 111, 102, 0.35);
+  stroke-width: 0.4;
+}
+
+.spain-map .dot {
+  fill: #1a3544;
+  stroke: #fff;
+  stroke-width: 0.45;
+  cursor: pointer;
+  transition: r 0.2s ease, fill 0.2s ease;
+}
+
+.spain-map .map-city.on .dot {
+  fill: var(--sea);
+}
+
+.spain-map .map-city.focus .dot {
+  fill: var(--coral);
+}
+
+.spain-map .label {
+  font-size: 2.4px;
+  fill: rgba(11, 31, 42, 0.72);
+  text-anchor: middle;
+  pointer-events: none;
+  font-family: var(--font-body);
+}
+
+.spain-map .map-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(11, 31, 42, 0.55);
+}
+
+.score-stack {
+  display: grid;
+  justify-items: end;
+  gap: 0.35rem;
+}
+
+.tax-note,
+.data-note {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  color: rgba(11, 31, 42, 0.58);
+  line-height: 1.4;
+}
+
+.data-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
 }
 
 .panel {
@@ -544,6 +679,10 @@ table.compare tbody tr:hover td:first-child {
 }
 
 @media (max-width: 960px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
   .kpis {
     grid-template-columns: repeat(2, 1fr);
   }
