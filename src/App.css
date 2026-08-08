@@ -129,37 +129,27 @@
   animation: rise 0.55s ease both;
 }
 
-.city-toggle-wrap {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 0.3rem;
-}
-
-.solo-btn {
+.select-all-btn {
   appearance: none;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
   border-radius: 999px;
-  padding: 0.25rem 0.55rem;
-  font-size: 0.72rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--ink-soft);
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.solo-btn:hover,
-.solo-btn.solid {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+.select-all-btn:hover {
+  background: var(--ink-soft);
+  border-color: var(--ink-soft);
 }
 
-.card-actions {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
+.select-all-btn[aria-pressed='true'] {
+  background: #fff;
+  color: var(--ink);
 }
 
 .city-card.featured {
@@ -299,14 +289,19 @@
 }
 
 .rank-row {
+  appearance: none;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.45rem;
+  grid-template-columns: 28px 1fr auto;
+  gap: 0.65rem;
   align-items: center;
-  padding: 0.35rem 0.45rem 0.35rem 0.55rem;
+  padding: 0.55rem 0.65rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid transparent;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
   transition: 0.2s ease;
 }
 
@@ -315,21 +310,6 @@
 .rank-row.selected {
   border-color: rgba(42, 157, 143, 0.35);
   background: #fff;
-}
-
-.rank-main {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
-  gap: 0.65rem;
-  align-items: center;
-  padding: 0.2rem 0;
-  text-align: left;
-  cursor: pointer;
-  color: inherit;
-  width: 100%;
 }
 
 .rank-body {

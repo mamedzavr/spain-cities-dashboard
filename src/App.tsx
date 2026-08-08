@@ -31,7 +31,7 @@ import './App.css'
 
 const DEFAULT_IDS = ['madrid', 'barcelona', 'valencia', 'sevilla']
 const CITY_COLORS = ['#2a9d8f', '#e8a838', '#c45c3e', '#1a3544', '#3d7ea6', '#0b1f2a']
-const MAX_SELECTED = 6
+const ALL_IDS = cities.map((c) => c.id)
 
 const radarKeys = [
   { key: 'jobMarket', label: 'Работа' },
@@ -161,21 +161,26 @@ export default function App() {
   const safest = [...selectedCities].sort((a, b) => b.safetyIndex - a.safetyIndex)[0]
   const bestJob = [...selectedCities].sort((a, b) => b.jobMarket - a.jobMarket)[0]
 
+  const allSelected = selected.length === ALL_IDS.length
+
   function toggleCity(id: string) {
     setSelected((prev) => {
       if (prev.includes(id)) {
         if (prev.length === 1) return prev
         return prev.filter((x) => x !== id)
       }
-      if (prev.length >= MAX_SELECTED) return [...prev.slice(1), id]
       return [...prev, id]
     })
     setFocusId(id)
   }
 
-  function selectOnly(id: string) {
-    setSelected([id])
-    setFocusId(id)
+  function toggleSelectAll() {
+    if (allSelected) {
+      setSelected(DEFAULT_IDS)
+      setFocusId(DEFAULT_IDS[0])
+    } else {
+      setSelected(ALL_IDS)
+    }
   }
 
   function onCategory(id: CategoryId) {
@@ -207,36 +212,32 @@ export default function App() {
       <section className="toolbar">
         <div className="panel">
           <div className="panel-head">
-            <h2>Города (1–{MAX_SELECTED})</h2>
-            <span className="hint-inline">
-              Клик — вкл/выкл · «только» — карточка одного города
-            </span>
+            <h2>Города · выбрано {selectedCities.length}</h2>
+            <button
+              type="button"
+              className="select-all-btn"
+              onClick={toggleSelectAll}
+              aria-pressed={allSelected}
+            >
+              {allSelected ? 'Сбросить' : 'Выбрать все'}
+            </button>
           </div>
           <div className="city-grid">
             {cities.map((city) => {
               const on = selected.includes(city.id)
               return (
-                <div key={city.id} className={`city-toggle-wrap${on ? ' active' : ''}`}>
-                  <button
-                    type="button"
-                    className={`city-toggle${on ? ' active' : ''}`}
-                    onClick={() => toggleCity(city.id)}
-                    aria-pressed={on}
-                  >
-                    <span className="name">{city.nameEs}</span>
-                    <span className="meta">
-                      {city.region} · {formatMetric(city.salaryNet, 'euro')} net
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    className="solo-btn"
-                    onClick={() => selectOnly(city.id)}
-                    title={`Смотреть только ${city.nameEs}`}
-                  >
-                    только
-                  </button>
-                </div>
+                <button
+                  key={city.id}
+                  type="button"
+                  className={`city-toggle${on ? ' active' : ''}`}
+                  onClick={() => toggleCity(city.id)}
+                  aria-pressed={on}
+                >
+                  <span className="name">{city.nameEs}</span>
+                  <span className="meta">
+                    {city.region} · {formatMetric(city.salaryNet, 'euro')} net
+                  </span>
+                </button>
               )
             })}
           </div>
@@ -377,40 +378,30 @@ export default function App() {
 
         <div className="panel">
           <h2 className="section-title">Рейтинг всех городов</h2>
-          <p className="cat-hint">Клик — добавить к сравнению · «только» — один город</p>
+          <p className="cat-hint">Клик — добавить или убрать город из сравнения</p>
           <div className="rank-list">
             {ranked.map(({ city, score }, i) => {
               const max = ranked[0].score
               return (
-                <div
+                <button
                   key={city.id}
+                  type="button"
                   className={`rank-row${focusId === city.id ? ' active' : ''}${selected.includes(city.id) ? ' selected' : ''}`}
+                  onClick={() => toggleCity(city.id)}
                 >
-                  <button
-                    type="button"
-                    className="rank-main"
-                    onClick={() => {
-                      setFocusId(city.id)
-                      if (!selected.includes(city.id)) toggleCity(city.id)
-                    }}
-                  >
-                    <span className="pos">{i + 1}</span>
-                    <span className="rank-body">
-                      <strong>{city.nameEs}</strong>
-                      <span className="rank-meta">
-                        {formatMetric(city.salaryNet, 'euro')} · аренда{' '}
-                        {formatMetric(city.rent1brCenter, 'euro')} · crime {city.crimeIndex}
-                      </span>
-                      <div className="bar">
-                        <i style={{ width: `${(score / max) * 100}%` }} />
-                      </div>
+                  <span className="pos">{i + 1}</span>
+                  <span className="rank-body">
+                    <strong>{city.nameEs}</strong>
+                    <span className="rank-meta">
+                      {formatMetric(city.salaryNet, 'euro')} · аренда{' '}
+                      {formatMetric(city.rent1brCenter, 'euro')} · crime {city.crimeIndex}
                     </span>
-                    <strong className="rank-score">{score}</strong>
-                  </button>
-                  <button type="button" className="solo-btn" onClick={() => selectOnly(city.id)}>
-                    только
-                  </button>
-                </div>
+                    <div className="bar">
+                      <i style={{ width: `${(score / max) * 100}%` }} />
+                    </div>
+                  </span>
+                  <strong className="rank-score">{score}</strong>
+                </button>
               )
             })}
           </div>
@@ -516,15 +507,8 @@ export default function App() {
                   {city.name} · {city.region} · {coastLabel(city.coast)}
                 </div>
               </div>
-              <div className="card-actions">
-                {!isSolo && (
-                  <button type="button" className="solo-btn solid" onClick={() => selectOnly(city.id)}>
-                    только этот
-                  </button>
-                )}
-                <div className="score-badge" title="Общий индекс">
-                  {overallScore(city)}
-                </div>
+              <div className="score-badge" title="Общий индекс">
+                {overallScore(city)}
               </div>
             </header>
             <p className="vibe">{city.vibe}</p>
